@@ -41,7 +41,12 @@
             "value": ""
 
         },
-        "openai.api_key": {
+        "Client_ID": {
+            "description": "Your key",
+            "value": ""
+            
+        },
+        "Client_secret": {
             "description": "Your key",
             "value": ""
             
