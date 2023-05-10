@@ -13,12 +13,17 @@ import openai
 openai.api_key = "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"
 
 # Set up your Telegram bot token
+app = Client(
 
-bot_token = "2054068506:AAHWDguBfxi7uingDrz3ozodZp16TAQK3Og"
-api_id = "5445756"
+    "Logo Bot",
 
-api_hash = "2a924a2f877aba6beed255e250f2ec2b"
-app = Client("my_account", api_id=api_id, api_hash=api_hash)
+    bot_token = os.environ["BOT_TOKEN"],
+
+    api_id = int(os.environ["API_ID"]),
+
+    api_hash = os.environ["API_HASH"]
+
+)
 
 # Set up your OpenAI chat model ID
 
