@@ -40,6 +40,11 @@
 
             "value": ""
 
+        },
+        "Openai_Key": {
+            "description": "Your key",
+            "value": ""
+            
         }
 
     },
