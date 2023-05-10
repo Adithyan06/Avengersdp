@@ -30,7 +30,7 @@ def generate_response(message: str) -> str:
 
     response = openai.Completion.create(
 
-        engine="text-davinci-003",  # or "text-davinci-002" for GPT-3 (non-turbo)
+        engine="text-davinci-002",  # or "text-davinci-002" for GPT-3 (non-turbo)
 
         prompt=message,
 
