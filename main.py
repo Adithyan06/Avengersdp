@@ -6,11 +6,7 @@ from pyrogram import Client, filters
 
 from pyrogram.types import Message
 
-from jiosaavnapi import JioSaavn
-# client_id = os.environ["Client_ID"]
-# client_secret = os.environ["Client_secret"]
-
-# Set up your Telegram bot token
+from logo_maker import LogoMaker
 
 app = Client(
 
@@ -23,54 +19,35 @@ app = Client(
     api_hash = os.environ["API_HASH"]
 
 )
+logo_maker = LogoMaker()
 
-# Set up Spotify client
-
-jiosaavn = JioSaavn()
 # Function to handle incoming messages
 
 @app.on_message(filters.command("start"))
 
 def handle_start_command(client: Client, message: Message):
 
-    welcome_message = "Welcome to JioSaavn Bot! Send me the name of a song to download."
+    welcome_message = "Welcome to Logo Maker Bot! Send me a text to create a logo."
 
     client.send_message(chat_id=message.chat.id, text=welcome_message)
 
 @app.on_message(filters.text)
 
-def handle_song_download(client: Client, message: Message):
+def handle_logo_creation(client: Client, message: Message):
 
-    # Get the song name from the user's message
+    # Get the text from the user's message
 
-    song_name = message.text.strip()
+    text = message.text.strip()
 
-    # Search for the song on JioSaavn
+    # Create the logo using LogoMaker
 
-    results = jiosaavn.search_for_song(song_name)
+    logo_path = logo_maker.create_logo(text)
 
-    # Check if any results found
+    # Send the logo to the user
 
-    if results:
-
-        # Get the first result
-
-        song = results[0]
-
-        # Download the song
-
-        song_path = song.download()
-
-        # Send the downloaded song to the user
-
-        client.send_audio(chat_id=message.chat.id, audio=song_path, title=song.title, performer=song.artist)
-
-    else:
-
-        error_message = "Sorry, I couldn't find the song you requested."
-
-        client.send_message(chat_id=message.chat.id, text=error_message)
+    client.send_photo(chat_id=message.chat.id, photo=logo_path)
 
 # Run the Pyrogram client
 
 app.run()
+
