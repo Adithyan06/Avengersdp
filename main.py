@@ -15,14 +15,14 @@ openai.api_key = "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"
 # Set up your Telegram bot token
 
 bot_token = "2054068506:AAHWDguBfxi7uingDrz3ozodZp16TAQK3Og"
+api_id = "5445756"
+
+api_hash = "2a924a2f877aba6beed255e250f2ec2b"
+app = Client("my_account", api_id=api_id, api_hash=api_hash)
 
 # Set up your OpenAI chat model ID
 
 model_id = "gpt-3.5-turbo"
-
-# Create a Pyrogram client
-
-app = Client("my_chat_bot", bot_token=bot_token)
 
 # Define a function to generate a response using OpenAI's GPT-3.5
 
