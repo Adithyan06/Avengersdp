@@ -41,7 +41,7 @@
             "value": ""
 
         },
-        "Openai_Key": {
+        "openai.api_key": {
             "description": "Your key",
             "value": ""
             
