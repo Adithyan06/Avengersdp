@@ -6,9 +6,7 @@ import pyrogram
 
 from pyrogram import Client, filters
 
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, InlineQuery, InlineQueryResultArticle, \
-
-    InputTextMessageContent
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, InlineQuery, InlineQueryResultArticle, InputTextMessageContent
 
 import openai
 
