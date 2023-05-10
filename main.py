@@ -10,7 +10,7 @@ import openai
 
 # Set up your OpenAI credentials
 
-openai.api_key = "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"
+openai.api_key = os.environ["openai.api_key"]
 
 # Set up your Telegram bot token
 app = Client(
