@@ -1,66 +1,78 @@
-import asyncio
 import os
-import random
-import re
-import urllib
-import requests
+
+import pyrogram
 
 from pyrogram import Client, filters
 
-Avengers=Client(
-    api_id = int(os.environ["API_ID"]),
-    api_hash = os.environ["API_HASH"],
-    bot_token = os.environ["BOT_TOKEN"],
-    session_name = os.environ["SESSION_NAME"]
-)
+from pyrogram.types import Message
 
-COLLECTION_STRING = [
-    "tom-&-jerry-iphone-wallpaper",
-    "avengers-hd-wallpapers-1080p",
-    "avengers-iphone-wallpaper",
-    "iron-man-wallpaper-1920x1080",
-    "indian-foods-wallpaper-1920x1080",
-    "spiderman-hd-4k-wallpapers",
-]
+import openai
 
-def animepp():
-    os.system("rm -rf donot.jpg")
-    rnd = random.randint(0, len(COLLECTION_STRING) - 1)
-    pack = COLLECTION_STRING[rnd]
-    pc = requests.get("http://getwallpapers.com/collection/" + pack).text
-    f = re.compile(r"/\w+/full.+.jpg")
-    f = f.findall(pc)
-    fy = "http://getwallpapers.com" + random.choice(f)
-    print(fy)
-    if not os.path.exists("f.ttf"):
-        urllib.request.urlretrieve("https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf", "f.ttf")
-    img = requests.get(fy)
-    with open("donottouch.jpg", "wb") as outfile:
-        outfile.write(img.content)
-    return "donottouch.jpg"
+# Set up your OpenAI credentials
 
-@Avengers.on_message(filters.command("start"))
-async def start(client, message):
-    await message.reply(f"**Hello {message.from_user.mention()} !**\nI am DP Changing Bot made by @Peterparker6 .")
+openai.api_key = "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"
 
-@Avengers.on_message(filters.command("avengers"))
-async def Avengers_main(client, message):
-    await message.reply(
-        "**Starting Avengers Profile Pic...\n\nDone !!! Check Your DP in 5 seconds.**")
+# Set up your Telegram bot token
 
-    while True:
-        if Avengers.is_connected:
-            animepp()
-            file = await Avengers.set_profile_photo(photo="donottouch.jpg")        
-            me = await Avengers.get_me()
-            photos = await Avengers.get_profile_photos("me")           
-            os.system("rm -rf donottouch.jpg")
-            try:
-                await Avengers.delete_profile_photos(photos[1].file_id)
-            except Exception:
-                pass        
-            print("Profile Updated!")
-        await asyncio.sleep(300)     
+bot_token = "2054068506:AAHWDguBfxi7uingDrz3ozodZp16TAQK3Og"
 
-print("☄️ AVENGERS ASSEMBLE! ☄️")
-Avengers.run()
+# Set up your OpenAI chat model ID
+
+model_id = "gpt-3.5-turbo"
+
+# Create a Pyrogram client
+
+app = Client("my_chat_bot", bot_token=bot_token)
+
+# Define a function to generate a response using OpenAI's GPT-3.5
+
+def generate_response(message: str) -> str:
+
+    response = openai.Completion.create(
+
+        engine="text-davinci-003",  # or "text-davinci-002" for GPT-3 (non-turbo)
+
+        prompt=message,
+
+        max_tokens=50,
+
+        temperature=0.7,
+
+        n=1,
+
+        stop=None,
+
+    )
+
+    return response.choices[0].text.strip()
+
+# Define a function to handle incoming messages
+
+@app.on_message(filters.command("start"))
+
+def handle_start_command(client: Client, message: Message):
+
+    welcome_message = "Welcome to the ChatBot! Send me a message, and I'll respond."
+
+    client.send_message(chat_id=message.chat.id, text=welcome_message)
+
+@app.on_message(~filters.command("start"))
+
+def handle_message(client: Client, message: Message):
+
+    # Get the user's message
+
+    user_message = message.text
+
+    # Generate a response using OpenAI
+
+    response = generate_response(user_message)
+
+    # Send the response back to the user
+
+    client.send_message(chat_id=message.chat.id, text=response)
+
+# Run the Pyrogram client
+
+app.run()
+
