@@ -56,12 +56,9 @@ def generate_response(message: str) -> str:
 # Define a function to handle incoming messages
 
 @app.on_message(filters.command("start"))
-
 async def handle_start_command(client: Client, message: Message):
-
-    welcome_message = "Welcome to the ChatBot! Send me a message, and I'll respond."
-
-    await message.reply_text(welcome_message)
+      welcome_message = "Welcome to the ChatBot! Send me a message, and I'll respond."
+      await message.reply_text(welcome_message)
 
 @app.on_message(filters.text)
 
@@ -76,7 +73,6 @@ async def handle_text_message(client: Client, message: Message):
     response = generate_response(user_message)
 
     # Send the response back to the user
-
     await message.reply_text(response)
 
 @app.on_message(filters.photo)
