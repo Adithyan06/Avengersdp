@@ -41,7 +41,7 @@ def handle_logo_creation(client: Client, message: Message):
 
     # Create the logo using LogoMaker
 
-    logo_path = logomaker.create_logo(text)
+    logo_path = logomaker.demo(text)
 
     # Send the logo to the user
 
