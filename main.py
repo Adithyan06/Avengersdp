@@ -36,7 +36,7 @@ def handle_image_conversion(client: Client, message: Message):
 
     # Get the photo file ID
 
-    photo_file_id = message.photo[-1].file_id
+    photo_file_id = message.image[-1].file_id
 
     # Get the file path of the photo
 
