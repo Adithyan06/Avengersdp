@@ -6,7 +6,7 @@ from pyrogram import Client, filters
 
 from pyrogram.types import Message
 
-import logo_maker 
+import logomaker 
 
 app = Client(
 
