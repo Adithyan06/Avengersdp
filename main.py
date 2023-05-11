@@ -6,7 +6,7 @@ from pyrogram import Client, filters
 
 from pyrogram.types import Message
 
-from logo_maker import LogoMaker
+import logo_maker 
 
 app = Client(
 
@@ -19,7 +19,7 @@ app = Client(
     api_hash = os.environ["API_HASH"]
 
 )
-logo_maker = LogoMaker()
+# logo_maker = LogoMaker()
 
 # Function to handle incoming messages
 
@@ -41,7 +41,7 @@ def handle_logo_creation(client: Client, message: Message):
 
     # Create the logo using LogoMaker
 
-    logo_path = logo_maker.create_logo(text)
+    logo_path = logomaker.create_logo(text)
 
     # Send the logo to the user
 
