@@ -22,7 +22,7 @@ users = set()
 
 def handle_start_command(client: Client, message: Message):
 
-    welcome_message = "Welcome to Broadcast Bot! Use /broadcast to send a message to all users."
+    welcome_message = "hi {}"
 
     client.send_message(chat_id=message.chat.id, text=welcome_message)
     users.add(message.chat.id)
