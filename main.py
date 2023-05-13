@@ -13,6 +13,9 @@ app = Client(
     api_hash = os.environ["API_HASH"]
 
 )
+
+users = set()
+
 # Function to handle incoming messages
 
 @app.on_message(filters.command("start"))
@@ -22,6 +25,7 @@ def handle_start_command(client: Client, message: Message):
     welcome_message = "Welcome to Broadcast Bot! Use /broadcast to send a message to all users."
 
     client.send_message(chat_id=message.chat.id, text=welcome_message)
+    users.add(message.chat.id)
 
 # Function to handle /broadcast command
 
@@ -29,7 +33,7 @@ def handle_start_command(client: Client, message: Message):
 
 def handle_broadcast_command(client: Client, message: Message):
 
-    # Check if the message is sent by the bot owner
+    # Check if the message is sent by an authorized user
 
     if message.from_user.id == 1078407883:
 
@@ -37,15 +41,9 @@ def handle_broadcast_command(client: Client, message: Message):
 
         broadcast_message = message.text[11:]  # Remove the "/broadcast " part from the message
 
-        # Get all the users in the bot's conversation list
-
-        users = client.get_chat_members(chat_id=1001563020763)
-
         # Send the broadcast message to each user
 
-        for user in users:
-
-            user_id = user.user.id
+        for user_id in users:
 
             try:
 
@@ -68,4 +66,3 @@ def handle_broadcast_command(client: Client, message: Message):
 # Run the Pyrogram client
 
 app.run()
-
