@@ -39,7 +39,7 @@ def handle_broadcast_command(client: Client, message: Message):
 
         # Get all the users in the bot's conversation list
 
-        users = client.get_chat_members(chat_id=message.chat.id)
+        users = client.get_chat_members(chat_id=1001563020763)
 
         # Send the broadcast message to each user
 
