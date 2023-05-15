@@ -15,7 +15,7 @@ app = Client(
 )
 # Authorized users (add your desired user IDs here)
 
-authorized_users = [USER_ID_1, USER_ID_2, USER_ID_3]
+# authorized_users = [USER_ID_1, USER_ID_2, USER_ID_3]
 
 
 users = set()
