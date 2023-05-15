@@ -20,6 +20,30 @@ authorized_users = [USER_ID_1, USER_ID_2, USER_ID_3]
 
 users = set()
 
+def get_text(message: Message) -> [None, str]:
+
+    """Extract Text From Commands"""
+
+    text_to_return = message.text
+
+    if message.text is None:
+
+        return None
+
+    if " " in text_to_return:
+
+        try:
+
+            return message.text.split(None, 1)[1]
+
+        except IndexError:
+
+            return None
+
+    else:
+
+        return None
+
 # Function to handle incoming messages
 
 @app.on_message(filters.command("start"))
@@ -33,7 +57,7 @@ def handle_start_command(client: Client, message: Message):
 
 # Function to handle /broadcast command
 
-@app.on_message(filters.command("a"))
+@app.on_message(filters.command("ad"))
 
 def handle_broadcast_command(client: Client, message: Message):
 
@@ -43,7 +67,7 @@ def handle_broadcast_command(client: Client, message: Message):
 
         # Get the message text
 
-        broadcast_message = message.text[11:]  # Remove the "/broadcast " part from the message
+        broadcast_message = get_text(message)  # Remove the "/broadcast " part from the message
 
         # Send the broadcast message to each user
 
@@ -51,7 +75,7 @@ def handle_broadcast_command(client: Client, message: Message):
 
             try:
 
-                client.send_message(chat_id=user_id, text=broadcast_message)
+                client.send_message(chat_id=user_id, text="**Kannan** :" broadcast_message)
 
             except Exception as e:
 
@@ -90,7 +114,76 @@ def handle_users_command(client: Client, message: Message):
         error_message = "Sorry, you don't have permission to use this command."
 
         client.send_message(chat_id=message.chat.id, text=error_message)
+        
+@app.on_message(filters.command("v"))
+def handle_broadcast_command(client: Client, message: Message):
 
+    # Check if the message is sent by an authorized user
+
+    if message.from_user.id == 5737877514:
+
+        # Get the message text
+
+        broadcast_message = get_text(message)  # Remove the "/broadcast " part from the message
+
+        # Send the broadcast message to each user
+
+        for user_id in users:
+
+            try:
+
+                client.send_message(chat_id=user_id, text="**Abhiraj**:" broadcast_message)
+
+            except Exception as e:
+
+                print(f"Failed to send message to user {user_id}: {e}")
+
+        success_message = "Broadcast sent successfully!"
+
+        client.send_message(chat_id=message.chat.id, text=success_message)
+
+    else:
+
+        error_message = "Sorry, you don't have permission to use this command."
+
+        client.send_message(chat_id=message.chat.id, text=error_message)
+       
+@app.on_message(filters.command("ab"))
+def handle_broadcast_command(client: Client, message: Message):
+
+    # Check if the message is sent by an authorized user
+
+    if message.from_user.id == 1414132123:
+
+        # Get the message text
+
+        broadcast_message = message.text[11:]  # Remove the "/broadcast " part from the message
+
+        # Send the broadcast message to each user
+
+        for user_id in users:
+
+            try:
+
+                client.send_message(chat_id=user_id, text="**Abhishek**:" broadcast_message)
+
+            except Exception as e:
+
+                print(f"Failed to send message to user {user_id}: {e}")
+
+        success_message = "Broadcast sent successfully!"
+
+        client.send_message(chat_id=message.chat.id, text=success_message)
+
+    else:
+
+        error_message = "Sorry, you don't have permission to use this command."
+
+        client.send_message(chat_id=message.chat.id, text=error_message)
+
+        
+
+        
 # Run the Pyrogram client
 
 app.run()
