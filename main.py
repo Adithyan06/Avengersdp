@@ -75,7 +75,7 @@ def handle_broadcast_command(client: Client, message: Message):
 
             try:
 
-                client.send_message(chat_id=user_id, text="**Kannan**:" broadcast_message)
+                client.send_message(chat_id=user_id, text=f"**Kannan**: {broadcast_message}")
 
             except Exception as e:
 
@@ -132,7 +132,7 @@ def handle_broadcast_command(client: Client, message: Message):
 
             try:
 
-                client.send_message(chat_id=user_id, text="**Abhiraj**:" broadcast_message)
+                client.send_message(chat_id=user_id, text=f"**Abhiraj**: {broadcast_message}")
 
             except Exception as e:
 
@@ -165,7 +165,7 @@ def handle_broadcast_command(client: Client, message: Message):
 
             try:
 
-                client.send_message(chat_id=user_id, text="**Abhishek**:" broadcast_message)
+                client.send_message(chat_id=user_id, text=f"**Abhishek**: {broadcast_message}")
 
             except Exception as e:
 
