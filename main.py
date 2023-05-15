@@ -75,7 +75,7 @@ def handle_broadcast_command(client: Client, message: Message):
 
             try:
 
-                client.send_message(chat_id=user_id, text="**Kannan** :" broadcast_message)
+                client.send_message(chat_id=user_id, text="**Kannan**:" broadcast_message)
 
             except Exception as e:
 
