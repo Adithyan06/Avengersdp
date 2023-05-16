@@ -38,15 +38,21 @@ def start_handler(client: Client, message: Message):
 def compress_video(client: Client, message: Message):
 
     video = message.video
-
     if video:
+
+        # Get the file path
+
+        file_path = client.get_file(video.file_id).file_path
+
+        
 
         # Download the video file
 
         video_file = f"{video.file_id}.mp4"
 
-        video.download(file_name=video_file)
+        client.download_media(file_path, video_file)
 
+        
         
 
         # Compress the video using ffmpeg
