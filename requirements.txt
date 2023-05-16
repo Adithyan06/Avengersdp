@@ -4,3 +4,4 @@ tgcrypto
 openai
 spotipy
 logomaker
+ffmpeg
