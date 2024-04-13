@@ -1,7 +1,5 @@
 requests
 pyrogram
 tgcrypto
-openai
-spotipy
-logomaker
 ffmpeg
+yt_dlp
