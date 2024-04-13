@@ -3,3 +3,4 @@ pyrogram
 tgcrypto
 ffmpeg
 yt-dlp
+youtube-dl
