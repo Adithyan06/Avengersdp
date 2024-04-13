@@ -2,4 +2,4 @@ requests
 pyrogram
 tgcrypto
 ffmpeg
-yt_dlp
+yt-dlp
