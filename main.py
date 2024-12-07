@@ -5,9 +5,9 @@ import shazamio
 import youtube_dl
 
 # Initialize your Pyrogram client
-api_id = "YOUR_API_ID"
-api_hash = "YOUR_API_HASH"
-bot_token = "YOUR_BOT_TOKEN"
+api_id = "5445756"
+api_hash = "2a924a2f877aba6beed255e250f2ec2b"
+bot_token = "2054068506:AAEpURXBDGdcZNUq_jmyAv9u2YnrrzAq7N0"
 
 app = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
