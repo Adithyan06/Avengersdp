@@ -52,3 +52,15 @@ async def yt_search(client, message):
     try:
         msg = await message.reply("🔎")
         results = YoutubeSearch(query, max_results=10).to_dict()
+        try:
+            link = f"https://youtube.com{results[0]['url_suffix']}"
+            title = results[0]["title"] 
+                audio_path = client.download_media(audio_file)
+    recognized_track = recognize_music(audio_path)
+    if recognized_track:
+        track_title = recognized_track['track']['title']
+        track_artist = recognized_track['track']['subtitle']
+        message.reply_text(f"Recognized track: {track_title} by {track_artist}")
+        download_music(recognized_track['track']['key'])
+        # Send the downloaded music file to the user
+        client.send_audio(chat_id=message.chat.id, audio='path_to_downloaded_file.flac', title=track_title, performer=track_artist)
