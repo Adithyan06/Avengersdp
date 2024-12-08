@@ -24,6 +24,9 @@ def download_music(url):
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
+        info_dict = ydl.extract_info(link, download=False)
+        audio = ydl.prepare_filename(info_dict)
+        return audio
         
 def get_text(message: Message) -> [None, str]:
     """Extract Text From Commands"""
@@ -55,5 +58,7 @@ async def yt_search(client, message):
         try:
             link = f"https://youtube.com{results[0]['url_suffix']}"
             title = results[0]["title"]
-            download_music(link)
-            client.send_audio(chat_id=message.chat.id, audio='path_to_downloaded_file.flac', title=title)
+            x = download_music(link)
+            client.send_audio(chat_id=message.chat.id, audio=x, title=title)
+
+app.run()
